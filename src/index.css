@@ -1,0 +1,582 @@
+/* ===================================================================
+   DESIGN TOKENS — Shivadnya Nagari Sahakari Patsanstha
+   Palette drawn from the society's own seal: deep indigo ring,
+   marigold-orange portrait, cream paper, gold hairlines.
+=================================================================== */
+:root {
+  --color-indigo:        #1E2A6E;
+  --color-indigo-dark:   #131C4D;
+  --color-indigo-tint:   #EDEFF8;
+  --color-marigold:      #E96A1C;
+  --color-marigold-dark: #C4550F;
+  --color-marigold-tint: #FDEBDC;
+  --color-gold:          #C6931A;
+  --color-cream:         #FBF6EC;
+  --color-paper:         #FFFDF8;
+  --color-ink:           #201C2E;
+  --color-ink-soft:      #5B5670;
+  --color-success:       #2F7D5A;
+
+  --font-display: 'Fraunces', 'Noto Sans Devanagari', serif;
+  --font-body: 'Inter', 'Noto Sans Devanagari', -apple-system, sans-serif;
+  --font-mr: 'Noto Sans Devanagari', 'Inter', sans-serif;
+
+  --radius-lg: 22px;
+  --radius-md: 14px;
+  --radius-sm: 8px;
+
+  --shadow-soft: 0 20px 45px -20px rgba(30, 42, 110, 0.28);
+  --shadow-tight: 0 8px 20px -10px rgba(30, 42, 110, 0.25);
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--color-ink);
+  background: var(--color-cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, .display-serif {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-indigo-dark);
+}
+
+.mr-text { font-family: var(--font-mr); }
+
+a { text-decoration: none; }
+
+::selection { background: var(--color-marigold-tint); color: var(--color-indigo-dark); }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+  outline: 3px solid var(--color-marigold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ===================================================================
+   UTILITIES
+=================================================================== */
+.text-indigo { color: var(--color-indigo); }
+.text-marigold { color: var(--color-marigold); }
+.text-ink-soft { color: var(--color-ink-soft); }
+.bg-indigo { background: var(--color-indigo); }
+.bg-cream { background: var(--color-cream); }
+.bg-paper { background: var(--color-paper); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-marigold-dark);
+}
+
+.divider-gold {
+  height: 3px;
+  width: 56px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-marigold));
+  border-radius: 3px;
+}
+
+.section-pad { padding-top: 84px; padding-bottom: 84px; }
+@media (max-width: 767.98px) {
+  .section-pad { padding-top: 56px; padding-bottom: 56px; }
+}
+
+.hero-pad { padding-top: 64px; padding-bottom: 56px; }
+@media (max-width: 767.98px) {
+  .hero-pad { padding-top: 40px; padding-bottom: 40px; }
+}
+
+.hero-seal-card {
+  width: 100%;
+  max-width: 340px;
+}
+@media (max-width: 991.98px) {
+  .hero-seal-card { max-width: 320px; }
+}
+
+.btn-brand {
+  background: var(--color-marigold);
+  border: 1px solid var(--color-marigold);
+  color: #fff;
+  font-weight: 600;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: var(--shadow-tight);
+}
+.btn-brand:hover, .btn-brand:focus {
+  background: var(--color-marigold-dark);
+  border-color: var(--color-marigold-dark);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-brand-outline {
+  background: transparent;
+  border: 1.5px solid var(--color-indigo);
+  color: var(--color-indigo);
+  font-weight: 600;
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  transition: all 0.15s ease;
+}
+.btn-brand-outline:hover, .btn-brand-outline:focus {
+  background: var(--color-indigo);
+  color: #fff;
+}
+
+.card-soft {
+  background: var(--color-paper);
+  border: 1px solid rgba(30, 42, 110, 0.08);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-tight);
+}
+
+/* ===================================================================
+   SIGNATURE ELEMENT — Registration Seal
+=================================================================== */
+.seal-badge {
+  --seal-size: 132px;
+  width: var(--seal-size);
+  height: var(--seal-size);
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background: var(--color-paper);
+  border: 2.5px solid var(--color-indigo);
+  box-shadow: var(--shadow-tight);
+  flex-shrink: 0;
+}
+.seal-badge::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1.5px dashed var(--color-gold);
+}
+.seal-badge .seal-number {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.7rem;
+  color: var(--color-indigo);
+  line-height: 1;
+}
+.seal-badge .seal-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-marigold-dark);
+  text-align: center;
+  padding: 0 10px;
+  margin-top: 4px;
+}
+.seal-badge .seal-star {
+  position: absolute;
+  color: var(--color-indigo);
+  font-size: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.seal-badge .seal-star.left { left: -6px; }
+.seal-badge .seal-star.right { right: -6px; }
+
+.seal-ring-logo {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--color-indigo);
+  box-shadow: var(--shadow-tight);
+  background: #fff;
+}
+
+/* Hero */
+.hero-section {
+  background: linear-gradient(180deg, var(--color-indigo-tint) 0%, var(--color-cream) 65%);
+  position: relative;
+  overflow: hidden;
+}
+.hero-section::after {
+  content: "";
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 32px solid rgba(230, 106, 28, 0.07);
+  pointer-events: none;
+}
+
+.hairline {
+  border: none;
+  border-top: 1px solid rgba(30, 42, 110, 0.12);
+}
+
+/* Top utility bar */
+.top-bar {
+  background: var(--color-indigo);
+  color: #fff;
+  font-size: 0.88rem;
+  padding: 14px 0;
+}
+.top-bar-link {
+  color: rgba(255, 255, 255, 0.9);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+.top-bar-link:hover,
+.top-bar-link:focus {
+  color: var(--color-marigold);
+}
+.top-bar-link i {
+  font-size: 0.85rem;
+}
+.top-bar .container {
+  justify-content: flex-end;
+}
+@media (max-width: 767.98px) {
+  .top-bar .container {
+    justify-content: center;
+  }
+  .top-bar-link span {
+    font-size: 0.78rem;
+  }
+}
+@media (max-width: 575.98px) {
+  .top-bar-link span { font-size: 0.78rem; }
+}
+
+/* ===================================================================
+   NAVBAR — base styles ONLY (untouched by language switching)
+=================================================================== */
+.brand-navbar {
+  background: var(--color-paper) !important;
+  box-shadow: 0 2px 18px -8px rgba(30, 42, 110, 0.22);
+}
+
+.brand-navbar .nav-link {
+  color: var(--color-ink) !important;
+  font-weight: 600;
+  margin: 0 6px;
+  position: relative;
+}
+.brand-navbar .nav-link.active,
+.brand-navbar .nav-link:hover {
+  color: var(--color-marigold-dark) !important;
+}
+.brand-navbar .nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 6px; right: 6px; bottom: -2px;
+  height: 2px;
+  background: var(--color-marigold);
+  border-radius: 2px;
+}
+
+/* ===================================================================
+   LANGUAGE TOGGLE BUTTONS ONLY — English / मराठी
+   (does NOT affect Home/About/Services/Contact)
+=================================================================== */
+.lang-toggle-btn {
+  transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+}
+.lang-toggle-btn:hover {
+  background-color: var(--color-marigold) !important;
+  border-color: var(--color-marigold) !important;
+  color: #fff !important;
+}
+
+.form-control-brand {
+  border-radius: var(--radius-sm);
+  border: 1.5px solid rgba(30, 42, 110, 0.18);
+  padding: 0.7rem 0.9rem;
+  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+.form-control-brand:focus {
+  border-color: var(--color-marigold);
+  box-shadow: 0 0 0 3px rgba(233, 106, 28, 0.15);
+  transform: translateY(-1px);
+}
+
+.auth-card {
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+.stat-strip {
+  background: var(--color-indigo);
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+}
+.stat-strip::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(255,255,255,0.04), transparent 35%, rgba(255,255,255,0.08));
+  transform: translateX(-25%);
+  animation: shimmer 8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ===================================================================
+   ANIMATIONS
+=================================================================== */
+.reveal {
+  animation: pageFadeUp 700ms ease-out both;
+}
+.fade-up {
+  animation: softFadeUp 700ms ease-out both;
+}
+.scale-in {
+  animation: softScaleIn 650ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.float-soft {
+  animation: floatY 5s ease-in-out infinite;
+  transform-origin: center;
+}
+.glow-in {
+  animation: titleGlow 900ms ease-out both;
+}
+.success-pop {
+  animation: softFadeUp 420ms ease-out both;
+}
+.delay-1 { animation-delay: 120ms; }
+.delay-2 { animation-delay: 240ms; }
+.delay-3 { animation-delay: 360ms; }
+
+.lift-on-hover {
+  transition: transform 240ms ease, box-shadow 240ms ease, background-color 240ms ease;
+  will-change: transform;
+}
+.lift-on-hover:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(18, 24, 40, 0.12);
+}
+
+.hero-seal {
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.hero-seal:hover {
+  transform: scale(1.04) rotate(-2deg);
+}
+
+.icon-bubble {
+  width: 56px;
+  height: 56px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: var(--color-marigold-tint);
+  transition: transform 240ms ease, background-color 240ms ease;
+}
+.icon-bubble-indigo {
+  background: var(--color-indigo-tint);
+}
+.card-soft:hover .icon-bubble {
+  transform: scale(1.08) rotate(-2deg);
+}
+
+.milestone-card {
+  transition: transform 240ms ease;
+}
+.milestone-card:hover {
+  transform: translateY(-4px);
+}
+.milestone-pop {
+  transition: transform 240ms ease;
+}
+.milestone-card:hover .milestone-pop {
+  transform: scale(1.03);
+}
+
+.hero-services {
+  position: relative;
+  overflow: hidden;
+}
+.hero-services::after {
+  content: '';
+  position: absolute;
+  inset: auto -10% 0 -10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.5), transparent);
+  opacity: 0.6;
+}
+
+.loan-services {
+  position: relative;
+}
+.loan-services::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top center, rgba(255,255,255,0.04), transparent 45%);
+  pointer-events: none;
+}
+
+.btn-motion {
+  transition: transform 220ms ease, box-shadow 220ms ease, opacity 220ms ease;
+}
+.btn-motion:hover {
+  transform: translateY(-2px);
+}
+
+.contact-hero {
+  position: relative;
+  overflow: hidden;
+}
+.contact-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto -10% 0 -10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.55), transparent);
+  opacity: 0.7;
+}
+
+.info-row {
+  transition: transform 220ms ease;
+}
+.info-row:hover {
+  transform: translateX(4px);
+}
+.info-icon {
+  transition: transform 220ms ease;
+}
+.info-row:hover .info-icon {
+  transform: scale(1.08);
+}
+
+.form-panel {
+  position: relative;
+}
+.form-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at top right, rgba(255,255,255,0.04), transparent 45%);
+  pointer-events: none;
+}
+
+@keyframes pageFadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes softFadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes softScaleIn {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes shimmer {
+  0%, 100% { transform: translateX(-20%); opacity: 0.5; }
+  50% { transform: translateX(20%); opacity: 1; }
+}
+
+@keyframes titleGlow {
+  from { opacity: 0; letter-spacing: 0.02em; transform: translateY(10px); }
+  to { opacity: 1; letter-spacing: 0; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .fade-up,
+  .scale-in,
+  .float-soft,
+  .glow-in,
+  .success-pop,
+  .stat-strip::before {
+    animation: none !important;
+  }
+
+  .lift-on-hover,
+  .hero-seal,
+  .icon-bubble,
+  .milestone-card,
+  .milestone-pop,
+  .info-row,
+  .info-icon,
+  .form-control-brand,
+  .btn-motion {
+    transition: none !important;
+  }
+}
+
+/* Attractive FAQ Accordion */
+.faq-accordion .accordion-item {
+  border: none;
+  border-radius: 14px !important;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+.faq-accordion .accordion-item:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.faq-accordion .accordion-button {
+  font-weight: 600;
+  color: var(--color-indigo-dark, #222);
+  background: #fff;
+  padding: 1.1rem 1.4rem;
+  border-radius: 14px !important;
+}
+
+.faq-accordion .accordion-button:not(.collapsed) {
+  color: var(--color-marigold, #d9822b);
+  background: var(--color-marigold-tint, #fdf1e0);
+  box-shadow: none;
+}
+
+.faq-accordion .accordion-button:focus {
+  box-shadow: none;
+  border: none;
+}
+
+.faq-accordion .accordion-button::after {
+  transition: transform 0.3s ease;
+}
+
+.faq-accordion .accordion-body {
+  padding: 1rem 1.4rem 1.3rem;
+  color: var(--color-ink-soft, #555);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
